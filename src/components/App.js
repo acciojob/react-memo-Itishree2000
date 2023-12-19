@@ -7,8 +7,7 @@ const App = () => {
   const [calculationResult, setCalculationResult] = useState("");
 
   function handleTodo() {
-    const newTodo = { id: todos.length, content: "New todo" };
-    setTodos([...todos, newTodo]);
+    setTodos([...todos, { id: todos.length + 1, content: "New todo" }]);
   }
 
   function handleInputValue(event) {
@@ -28,7 +27,7 @@ const App = () => {
 
   function handleAddSkill() {
     if (inputText.length > 0) {
-      setTodos([...todos, { id: todos.length, content: inputText }]);
+      setTodos([...todos, { id: todos.length + 1, content: inputText }]);
       setInputText("");
     } else {
       alert("Please enter a skill.");
@@ -52,11 +51,11 @@ const App = () => {
           value={inputText}
           onChange={handleInputValue}
         />
-        <button id="skill-btn" onClick={handleAddSkill}>Add Skill</button>
+        <button id="add-skill-btn" onClick={handleAddSkill}>Add Skill</button>
       </div>
       <ul>
         {todos.map((todo, index) => (
-          <li key={index} id={`todo-${index}`}>{todo.content}</li>
+          <li key={index} id={`item-${index}`}>{todo.content}</li>
         ))}
       </ul>
     </div>
@@ -64,4 +63,5 @@ const App = () => {
 };
 
 export default App;
+
 
