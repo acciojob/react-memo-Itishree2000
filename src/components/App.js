@@ -1,32 +1,37 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 
 const App = () => {
-  const [todos, setToDo] = useState([]);
+  const [todos, setTodos] = useState([]);
   const [inputText, setInputText] = useState("");
   const [count, setCount] = useState(0);
   const [calculationResult, setCalculationResult] = useState("");
+
   function handleTodo() {
-    setToDo([...todos, { id: todos.length + 1, content: "New todo" }]);
+    const newTodo = { id: todos.length, content: "New todo" };
+    setTodos([...todos, newTodo]);
   }
+
   function handleInputValue(event) {
     setInputText(event.target.value);
   }
+
   function handleCount() {
     setCount((prevCount) => prevCount + 1);
-    const result=expensiveCalculation();
+    const result = expensiveCalculation();
     setCalculationResult(result);
   }
-  function expensiveCalculation(){
-    const result=count*10000000;
+
+  function expensiveCalculation() {
+    const result = count * 10000000;
     return result;
   }
-  
-  function handleAddItem() {
-    if (inputText.length > 5) {
-      setToDo([...todos, { id: todos.length + 1, content: inputText }]);
+
+  function handleAddSkill() {
+    if (inputText.length > 0) {
+      setTodos([...todos, { id: todos.length, content: inputText }]);
       setInputText("");
     } else {
-      alert("Text should be greater than 5 characters.");
+      alert("Please enter a skill.");
     }
   }
 
@@ -36,23 +41,27 @@ const App = () => {
       <h1>My todos</h1>
       <div>
         <button id="add-todo-btn" onClick={handleTodo}>Add Todo</button>
-        <button id="incr-cnt" onClick={handleCount}>Count:{count} +</button>
+        <button id="incr-cnt" onClick={handleCount}>Count: {count} +</button>
+        <span id="calc">Expensive Calculation: {calculationResult}</span>
       </div>
       <div>
-        <input id="skill-input"
+        <input
+          id="skill-input"
           type="text"
           placeholder="Enter Skill"
           value={inputText}
           onChange={handleInputValue}
         />
-        <button onClick={handleAddItem}>Add Skill</button>
+        <button id="skill-btn" onClick={handleAddSkill}>Add Skill</button>
       </div>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
+        {todos.map((todo, index) => (
+          <li key={index} id={`todo-${index}`}>{todo.content}</li>
         ))}
       </ul>
     </div>
   );
 };
+
 export default App;
+
