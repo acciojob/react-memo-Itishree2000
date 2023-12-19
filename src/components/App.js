@@ -31,17 +31,17 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div id="main">
       <h1>React.useMemo</h1>
       <h1>My todos</h1>
       <div>
-        <button onClick={handleTodo}>Add Todo</button>
-        <button onClick={handleCount}>Count:{count} +</button>
+        <button id="add-todo-btn" onClick={handleTodo}>Add Todo</button>
+        <button id="incr-cnt" onClick={handleCount}>Count:{count} +</button>
       </div>
       <div>
-        <input
+        <input id="skill-input"
           type="text"
-          placeholder=""
+          placeholder="Enter Skill"
           value={inputText}
           onChange={handleInputValue}
         />
